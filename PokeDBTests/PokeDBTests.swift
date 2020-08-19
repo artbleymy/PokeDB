@@ -20,7 +20,7 @@ final class PokeDBTests: XCTestCase
 	}
 
 	func testUnitExample1() throws {
-		XCTAssertTrue(true)
+		XCTAssertTrue(false)
 	}
 
 	func testUnitExample2() throws {
