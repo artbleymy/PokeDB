@@ -8,6 +8,7 @@ DerivedData/
 test_output/
 
 ## Various settings
+*.lock
 *.pbxuser
 !default.pbxuser
 *.mode1v3
