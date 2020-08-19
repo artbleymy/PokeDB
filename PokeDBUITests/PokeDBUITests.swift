@@ -18,12 +18,12 @@ final class PokeDBUITests: XCTestCase
 	}
 
 	func testUIExample1() throws {
-		let app = XCUIApplication()
-		app.launch()
+//		let app = XCUIApplication()
+//		app.launch()
 	}
 
 	func testUIExample2() throws {
-		let app = XCUIApplication()
-		app.launch()
+//		let app = XCUIApplication()
+//		app.launch()
 	}
 }
