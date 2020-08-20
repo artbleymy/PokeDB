@@ -6,10 +6,49 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
-
     steps:
     - uses: actions/checkout@v2
-    - name: Run tests
-      run: bundle exec fastlane testlane
+    - name: Build
+      run: bundle exec fastlane buildLane
+    - name: Upload build
+      uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: derivedData/Build/Products/Debug-iphonesimulator/PokeDB.app
+    - name: Upload runner
+      uses: actions/upload-artifact@v1
+      with:
+        name: runner
+        path: derivedData/Build/Products/Debug-iphonesimulator/PokeDBUITests-Runner.app
+      
+  unitTests:
+    needs: [build]
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download result of build
+      uses: actions/download-artifact@v1
+      with:
+        name: build
+        path: derivedData/Build/Products/Debug-iphonesimulator/PokeDB.app
+    - name: Run unit-tests
+      run: bundle exec fastlane unitTestLane
+      
+  uiTests:
+    needs: [build, unitTests]
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Download result of build
+      uses: actions/download-artifact@v1
+      with:
+        name: build
+        path: derivedData/Build/Products/Debug-iphonesimulator/PokeDB.app
+    - name: Download runner
+      uses: actions/download-artifact@v1
+      with:
+        name: runner
+        path: derivedData/Build/Products/Debug-iphonesimulator/PokeDBUITests-Runner.app
+    - name: Run ui-tests
+      run: bundle exec fastlane uiTestLane
