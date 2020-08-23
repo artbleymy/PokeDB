@@ -16,9 +16,9 @@ struct ModulesFactory
 		let favoritesTab = self.makeFavoritesTab()
 
 		tabBarController.viewControllers = [pokemonsTab, favoritesTab]
-		tabBarController.viewControllers?.forEach {
-			self.configureTabItem(for: $0)
-		}
+		self.configureTabItem(for: pokemonsTab, moduleType: .pokemonsList)
+		self.configureTabItem(for: favoritesTab, moduleType: .favoritesList)
+
 		tabBarController.navigationController?.navigationBar.isHidden = true
 		return tabBarController
 	}
@@ -52,13 +52,13 @@ private extension ModulesFactory
 		return navigationController
 	}
 
-	func configureTabItem(for controller: UIViewController) {
+	func configureTabItem(for controller: UIViewController, moduleType: ModuleType) {
 		guard let title = controller.title else {
 			assertionFailure("Empty controller title")
 			return
 		}
 
-		guard let iconName = Constants.tabIcons[title] else {
+		guard let iconName = Constants.tabIcons[moduleType] else {
 			assertionFailure("No iconName for title \(title)")
 			return
 		}
