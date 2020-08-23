@@ -9,6 +9,8 @@ import UIKit
 
 public enum PokemonsListAssembly
 {
+	static let moduleType: ModuleType = .pokemonsList
+
 	public struct Dependencies
 	{
 	}
@@ -17,9 +19,9 @@ public enum PokemonsListAssembly
 		let viewController = PokemonsListViewController()
 		let router = PokemonsListRouter()
 		let presenter = PokemonsListPresenter(router: router)
-		let view = PokemonsListView(presenter: presenter)
+		let view = PokemonsListView(presenter: presenter, moduleType: self.moduleType)
 		presenter.inject(ui: view)
-		viewController.title = "Pokemons"
+		viewController.title = self.moduleType.moduleTitle()
 		viewController.view = view
 		return viewController
 	}

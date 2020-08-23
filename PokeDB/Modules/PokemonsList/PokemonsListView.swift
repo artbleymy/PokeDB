@@ -16,14 +16,16 @@ protocol IPokemonsListView: AnyObject
 
 final class PokemonsListView: UIView
 {
+	private let moduleType: ModuleType
 	private let presenter: IPokemonsListPresenter
 	private let searchBar = UISearchBar()
 	private let tableView = UITableView()
 	private let refreshControl = UIRefreshControl()
 	private let loader = UIActivityIndicatorView()
 
-	init(presenter: IPokemonsListPresenter) {
+	init(presenter: IPokemonsListPresenter, moduleType: ModuleType) {
 		self.presenter = presenter
+		self.moduleType = moduleType
 		super.init(frame: .zero)
 		self.setupUI()
 	}
@@ -32,7 +34,6 @@ final class PokemonsListView: UIView
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-
 }
 
 // MARK: - IPokemonsListView
@@ -139,5 +140,10 @@ private extension PokemonsListView
 	func refresh(sender: UIRefreshControl) {
 		print("Refreshing")
 		sender.endRefreshing()
+	}
+
+	func setAccesabilityIds() {
+		self.tableView.accessibilityIdentifier = self.moduleType.rawValue + "_tableView"
+		self.searchBar.accessibilityIdentifier = self.moduleType.rawValue + "_searchBar"
 	}
 }

@@ -9,10 +9,11 @@ import UIKit
 
 enum Constants
 {
-	static let tabIcons: [String: String] = [
-		"Pokemons": "list.dash",
-		"Favorites": "star.fill",
+	static let tabIcons: [ModuleType: String] = [
+		.pokemonsList: "list.dash",
+		.favoritesList: "star.fill",
 	]
+
 	static let cellIdentifier = "Cell"
 
 	enum Metrics

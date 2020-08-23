@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		851D1F4724EEF06B00BDFF14 /* PokemonsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851D1F4624EEF06B00BDFF14 /* PokemonsListAssembly.swift */; };
+		853C0F3324F2B86600B95CBA /* ModuleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853C0F3224F2B86600B95CBA /* ModuleType.swift */; };
 		85517A0624EC38B20048A311 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85517A0524EC38B20048A311 /* AppDelegate.swift */; };
 		85517A0A24EC38B20048A311 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85517A0924EC38B20048A311 /* ViewController.swift */; };
 		85517A0F24EC38B80048A311 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85517A0E24EC38B80048A311 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		851D1F4624EEF06B00BDFF14 /* PokemonsListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListAssembly.swift; sourceTree = "<group>"; };
+		853C0F3224F2B86600B95CBA /* ModuleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleType.swift; sourceTree = "<group>"; };
 		85517A0224EC38B20048A311 /* PokeDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85517A0524EC38B20048A311 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85517A0924EC38B20048A311 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				85517A3E24EEE6800048A311 /* Constants.swift */,
+				853C0F3224F2B86600B95CBA /* ModuleType.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				85C3D4C124F29F7D005E1A1B /* PokemonsListPresenter.swift in Sources */,
 				85C3D4C324F29FBC005E1A1B /* PokemonsListViewController.swift in Sources */,
 				85517A0624EC38B20048A311 /* AppDelegate.swift in Sources */,
+				853C0F3324F2B86600B95CBA /* ModuleType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
