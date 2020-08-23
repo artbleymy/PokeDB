@@ -14,9 +14,13 @@ public enum PokemonsListAssembly
 	}
 
 	public static func makeModule(dependencies: Dependencies) -> UIViewController {
-		let viewController = StartViewController()
+		let viewController = PokemonsListViewController()
+		let router = PokemonsListRouter()
+		let presenter = PokemonsListPresenter(router: router)
+		let view = PokemonsListView(presenter: presenter)
+		presenter.inject(ui: view)
 		viewController.title = "Pokemons"
-		viewController.view.backgroundColor = .blue
+		viewController.view = view
 		return viewController
 	}
 }
