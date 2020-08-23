@@ -92,6 +92,7 @@ private extension PokemonsListView
 		self.setupSearchBar(with: safeArea)
 		self.setupTableView(with: safeArea)
 		self.setupActivityIndicator(with: safeArea)
+		self.setAccesabilityIds()
 	}
 
 	func setupRefreshControl() {
@@ -143,7 +144,7 @@ private extension PokemonsListView
 	}
 
 	func setAccesabilityIds() {
-		self.tableView.accessibilityIdentifier = self.moduleType.rawValue + "_tableView"
-		self.searchBar.accessibilityIdentifier = self.moduleType.rawValue + "_searchBar"
+		self.tableView.accessibilityIdentifier = self.moduleType.rawValue + Constants.AccessablityIdPostfix.tableView.rawValue
+		self.searchBar.accessibilityIdentifier = self.moduleType.rawValue + Constants.AccessablityIdPostfix.searchBar.rawValue
 	}
 }

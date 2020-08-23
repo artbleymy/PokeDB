@@ -20,4 +20,10 @@ enum Constants
 	{
 		static let cellHeight: CGFloat = 60
 	}
+
+	enum AccessablityIdPostfix: String
+	{
+		case tableView
+		case searchBar
+	}
 }
