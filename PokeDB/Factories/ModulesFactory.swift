@@ -48,7 +48,7 @@ private extension ModulesFactory
 
 	func makeNavigationController(with rootViewController: UIViewController) -> UIViewController {
 		let navigationController = UINavigationController(rootViewController: rootViewController)
-		navigationController.navigationBar.isHidden = true
+		navigationController.navigationBar.prefersLargeTitles = true
 		return navigationController
 	}
 
