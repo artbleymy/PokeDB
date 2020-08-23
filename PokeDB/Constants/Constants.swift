@@ -13,4 +13,10 @@ enum Constants
 		"Pokemons": "list.dash",
 		"Favorites": "star.fill",
 	]
+	static let cellIdentifier = "Cell"
+
+	enum Metrics
+	{
+		static let cellHeight: CGFloat = 60
+	}
 }

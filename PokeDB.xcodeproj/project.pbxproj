@@ -21,6 +21,7 @@
 		85C3D4C124F29F7D005E1A1B /* PokemonsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C3D4C024F29F7D005E1A1B /* PokemonsListPresenter.swift */; };
 		85C3D4C324F29FBC005E1A1B /* PokemonsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C3D4C224F29FBC005E1A1B /* PokemonsListViewController.swift */; };
 		85C3D4C524F2A079005E1A1B /* PokemonsListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C3D4C424F2A079005E1A1B /* PokemonsListRouter.swift */; };
+		85C3D4C824F2AAB6005E1A1B /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C3D4C724F2AAB6005E1A1B /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		85C3D4C024F29F7D005E1A1B /* PokemonsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListPresenter.swift; sourceTree = "<group>"; };
 		85C3D4C224F29FBC005E1A1B /* PokemonsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListViewController.swift; sourceTree = "<group>"; };
 		85C3D4C424F2A079005E1A1B /* PokemonsListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListRouter.swift; sourceTree = "<group>"; };
+		85C3D4C724F2AAB6005E1A1B /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		85517A0424EC38B20048A311 /* PokeDB */ = {
 			isa = PBXGroup;
 			children = (
+				85C3D4C624F2AA99005E1A1B /* CommonViews */,
 				851D1F4524EEEFB400BDFF14 /* Modules */,
 				85517A3D24EEE6720048A311 /* Constants */,
 				85517A3A24EEDD080048A311 /* Factories */,
@@ -208,6 +211,14 @@
 			children = (
 			);
 			path = PokemonDetails;
+			sourceTree = "<group>";
+		};
+		85C3D4C624F2AA99005E1A1B /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				85C3D4C724F2AAB6005E1A1B /* Cell.swift */,
+			);
+			path = CommonViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +376,7 @@
 				85517A0A24EC38B20048A311 /* ViewController.swift in Sources */,
 				85C3D4BF24F29F73005E1A1B /* PokemonsListView.swift in Sources */,
 				85C3D4BC24EEF395005E1A1B /* FavoritesAssembly.swift in Sources */,
+				85C3D4C824F2AAB6005E1A1B /* Cell.swift in Sources */,
 				85517A3F24EEE6800048A311 /* Constants.swift in Sources */,
 				85517A3C24EEDD1A0048A311 /* ModulesFactory.swift in Sources */,
 				851D1F4724EEF06B00BDFF14 /* PokemonsListAssembly.swift in Sources */,
