@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "order": 2,
+        "name": "pikachu",
+        "sprites": []
+    },
+    {
+        "id": 2,
+        "order": 5,
+        "name": "raichu",
+        "sprites": []
+    }
+]

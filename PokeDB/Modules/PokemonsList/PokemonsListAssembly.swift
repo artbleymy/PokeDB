@@ -13,12 +13,13 @@ public enum PokemonsListAssembly
 
 	public struct Dependencies
 	{
+		let pokemonsListRepository: IPokemonsListRepository
 	}
 
 	public static func makeModule(dependencies: Dependencies) -> UIViewController {
 		let viewController = PokemonsListViewController()
 		let router = PokemonsListRouter()
-		let presenter = PokemonsListPresenter(router: router)
+		let presenter = PokemonsListPresenter(router: router, pokemonsListRepository: dependencies.pokemonsListRepository)
 		let view = PokemonsListView(presenter: presenter, moduleType: self.moduleType)
 		presenter.inject(ui: view)
 		viewController.title = self.moduleType.moduleTitle()
