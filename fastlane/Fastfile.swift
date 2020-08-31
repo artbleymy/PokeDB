@@ -12,6 +12,7 @@ class Fastfile: LaneFile {
 	func buildLane() {
 		desc("Build for testing")
 		scan(
+			scheme: "PokeDB",
 			derivedDataPath: "derivedData",
 			buildForTesting: true
 		)
@@ -20,6 +21,7 @@ class Fastfile: LaneFile {
 	func unitTestLane() {
 		desc("Run unit tests")
 		scan(
+			scheme: "PokeDBTests",
 			onlyTesting: "PokeDBTests",
 			derivedDataPath: "derivedData",
 			testWithoutBuilding: true
@@ -29,6 +31,7 @@ class Fastfile: LaneFile {
 	func uiTestLane() {
 		desc("Run ui-tests")
 		scan(
+			scheme: "PokeDBTests",
 			onlyTesting: "PokeDBUITests",
 			derivedDataPath: "derivedData",
 			testWithoutBuilding: true
