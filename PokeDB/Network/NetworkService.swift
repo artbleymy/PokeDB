@@ -10,10 +10,10 @@ import Foundation
 protocol INetworkService
 {
 	func request<T: Decodable>(to endpoint: Endpoint,
-							   completion: @escaping (Result<T, ServiceError>) -> Void)
+							   completion: @escaping (Result<T, ServiceError>, URL) -> Void)
 
 	func request<T: Decodable>(from url: URL?,
-							   completion: @escaping (Result<T, ServiceError>) -> Void)
+							   completion: @escaping (Result<T, ServiceError>, URL) -> Void)
 }
 
 final class NetworkService: INetworkService
@@ -22,7 +22,7 @@ final class NetworkService: INetworkService
 	private var dataTask: URLSessionDataTask?
 
 	func request<T: Decodable>(to endpoint: Endpoint,
-							   completion: @escaping (Result<T, ServiceError>) -> Void) {
+							   completion: @escaping (Result<T, ServiceError>, URL) -> Void) {
 
 		let urlComponent = URLComponents(string: Constants.Network.pokeApiUrl + endpoint.rawValue)
 
@@ -35,7 +35,7 @@ final class NetworkService: INetworkService
 	}
 
 	func request<T: Decodable>(from url: URL?,
-							   completion: @escaping (Result<T, ServiceError>) -> Void) {
+							   completion: @escaping (Result<T, ServiceError>, URL) -> Void) {
 
 		guard let url = url else {
 			assertionFailure("Invalid url")
@@ -47,34 +47,34 @@ final class NetworkService: INetworkService
 
 private extension NetworkService
 {
-	func fetch<T: Decodable>(_ url: URL, completion: @escaping (Result<T, ServiceError>) -> Void) {
+	func fetch<T: Decodable>(_ url: URL, completion: @escaping (Result<T, ServiceError>, URL) -> Void) {
 
 		dataTask = session.dataTask(with: url) { data, response, error in
 			if let error = error {
-				completion(.failure(.networkError(error)))
+				completion(.failure(.networkError(error)), url)
 			}
 			else {
 				guard let httpResponse = response as? HTTPURLResponse else {
-					completion(.failure(.httpResponseError))
+					completion(.failure(.httpResponseError), url)
 					return
 				}
 
 				guard 200..<300 ~= httpResponse.statusCode else {
-					completion( .failure(.httpError(httpResponse.statusCode)))
+					completion( .failure(.httpError(httpResponse.statusCode)), url)
 					return
 				}
 
 				if let data = data {
 					do {
 						let resultData = try JSONDecoder().decode(T.self, from: data)
-						completion(.success(resultData))
+						completion(.success(resultData), url)
 					}
 					catch {
-						completion(.failure(.parsingError(error)))
+						completion(.failure(.parsingError(error)), url)
 					}
 				}
 				else {
-						completion( .failure(.dataError))
+						completion( .failure(.dataError), url)
 				}
 			}
 		}
