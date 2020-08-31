@@ -8,10 +8,10 @@
 
 struct Pokemon: Codable, Equatable
 {
-	let id: Int?
-	let name: String?
-	let order: Int?
-	let sprites: [PokemonSprites]
+	let id: Int
+	let name: String
+	let order: Int
+	let sprites: PokemonSprites
 
 	static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
 		return lhs.id == rhs.id &&
