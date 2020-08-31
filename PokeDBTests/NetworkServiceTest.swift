@@ -22,7 +22,7 @@ final class NetworkServiceTests: XCTestCase
 
 		let networkService = NetworkServiceMock(response: "pokemons_list")
 
-		networkService.request(to: .pokemon) { (result: Result<PokemonsList, ServiceError>) in
+		networkService.request(to: .pokemonsList) { (result: Result<PokemonsList, ServiceError>, _) in
 			switch result {
 			case .success(let pokemons):
 				XCTAssertEqual(pokemons, pokemonsList)
@@ -34,7 +34,7 @@ final class NetworkServiceTests: XCTestCase
 
 	func testNetworkServideParsingError() {
 		let networkService = NetworkServiceMock(response: "pokemons_list_invalid")
-		networkService.request(to: .pokemon) { (result: Result<PokemonsList, ServiceError>) in
+		networkService.request(to: .pokemonsList) { (result: Result<PokemonsList, ServiceError>, _) in
 			switch result {
 			case .failure(.parsingError):
 				return

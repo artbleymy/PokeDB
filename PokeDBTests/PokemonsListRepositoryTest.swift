@@ -5,6 +5,7 @@
 //  Created by Станислав Козлов on 27.08.2020.
 //  Copyright © 2020 stanislavkozlov. All rights reserved.
 //
+// swiftlint:disable force_unwrapping
 
 import XCTest
 @testable import PokeDB
@@ -12,17 +13,20 @@ import XCTest
 final class PokemonsListRepositoryTest: XCTestCase
 {
 	func testPokemonsListRepository() {
-		let pokemonsList = PokemonsList(count: 1050,
-										next: URL(string: "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"),
-										previous: nil,
-										results: [
-											NamedAPIResource(name: "bulbasaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/1/")),
-											NamedAPIResource(name: "ivysaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/2/")),
-		])
+		let pokemonsList = [
+			Pokemon(id: 1,
+					name: "bulbasaur",
+					url: URL(string: "https://pokeapi.co/api/v2/pokemon/1/")!,
+					imageUrl: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")!),
+			Pokemon(id: 2,
+					name: "ivysaur",
+					url: URL(string: "https://pokeapi.co/api/v2/pokemon/2/")!,
+					imageUrl: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png")!),
+		]
 
 		let pokemonsListRepository = PokemonsListRepositoryMock()
 
-		pokemonsListRepository.loadPokemons { (result: Result<PokemonsList, ServiceError>) in
+		pokemonsListRepository.loadPokemons { (result: Result<[Pokemon], ServiceError>) in
 			switch result {
 			case .success(let pokemons):
 				XCTAssertEqual(pokemons, pokemonsList)

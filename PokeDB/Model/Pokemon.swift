@@ -7,10 +7,20 @@
 //
 import Foundation
 
-struct Pokemon
+struct Pokemon: Codable
 {
 	let id: Int
 	let name: String
 	let url: URL
 	let imageUrl: URL?
+}
+
+extension Pokemon: Equatable
+{
+	static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
+		return lhs.id == rhs.id &&
+			lhs.name == rhs.name &&
+			lhs.url == rhs.url &&
+			lhs.imageUrl == rhs.imageUrl
+	}
 }
