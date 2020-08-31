@@ -9,6 +9,13 @@ import UIKit
 
 struct ModulesFactory
 {
+	let networkService = NetworkService()
+	let pokemonsListRepository: IPokemonsListRepository
+
+	init() {
+		self.pokemonsListRepository = PokemonsListRepository(networkService: networkService)
+	}
+
 	func makeTabsModule() -> UIViewController {
 		let tabBarController = UITabBarController()
 
@@ -35,7 +42,7 @@ private extension ModulesFactory
 	}
 
 	func makePokemonsList() -> UIViewController {
-		let dependencies = PokemonsListAssembly.Dependencies()
+		let dependencies = PokemonsListAssembly.Dependencies(pokemonsListRepository: self.pokemonsListRepository)
 		let pokemonsListModule = PokemonsListAssembly.makeModule(dependencies: dependencies)
 		return pokemonsListModule
 	}

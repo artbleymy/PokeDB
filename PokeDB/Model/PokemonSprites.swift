@@ -7,7 +7,7 @@
 //
 import Foundation
 
-struct PokemonSprites: Codable
+struct PokemonSprites: Codable, Equatable
 {
 	let frontDefault: URL?
 }

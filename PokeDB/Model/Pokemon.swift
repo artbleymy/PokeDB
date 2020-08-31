@@ -6,10 +6,17 @@
 //  Copyright © 2020 stanislavkozlov. All rights reserved.
 //
 
-struct Pokemon: Codable
+struct Pokemon: Codable, Equatable
 {
 	let id: Int?
 	let name: String?
 	let order: Int?
 	let sprites: [PokemonSprites]
+
+	static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
+		return lhs.id == rhs.id &&
+			lhs.name == rhs.name &&
+			lhs.order == rhs.order &&
+			lhs.sprites == rhs.sprites
+	}
 }
