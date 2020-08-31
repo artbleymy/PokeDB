@@ -26,4 +26,9 @@ enum Constants
 		case tableView
 		case searchBar
 	}
+
+	enum Network
+	{
+		static let pokeApiUrl = "https://pokeapi.co/api/v2/"
+	}
 }

@@ -9,5 +9,10 @@ import Foundation
 
 struct PokemonSprites: Codable, Equatable
 {
-	let frontDefault: URL?
+	var frontDefault: URL?
+
+	private enum CodingKeys: String, CodingKey
+	{
+		case frontDefault = "front_default"
+	}
 }

@@ -37,8 +37,8 @@ private extension PokemonsListPresenter
 	func loadPokemons() {
 		self.pokemonsListRepository.loadPokemons { result in
 			switch result {
-			case .success(let pokemonsList):
-				print(pokemonsList.results)
+			case .success(let pokemons):
+				print(pokemons)
 			case .failure(let error):
 				print(error)
 			}

@@ -9,7 +9,8 @@
 enum ServiceError: Error
 {
 	case httpError(Int)
-	case networkError
+	case networkError(Error)
 	case dataError
 	case parsingError(Error)
+	case httpResponseError
 }
