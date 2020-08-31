@@ -28,26 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "85517A1724EC38B80048A311"
-               BuildableName = "PokeDBTests.xctest"
-               BlueprintName = "PokeDBTests"
-               ReferencedContainer = "container:PokeDB.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "85517A2224EC38B80048A311"
-               BuildableName = "PokeDBUITests.xctest"
-               BlueprintName = "PokeDBUITests"
-               ReferencedContainer = "container:PokeDB.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
