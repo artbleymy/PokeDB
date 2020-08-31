@@ -1,14 +1,15 @@
-[
-    {
-        "id": 1,
-        "order": 2,
-        "name": "pikachu",
-        "sprites": []
-    },
-    {
-        id": 2,
-        "order": 5,
-        "name": "raichu",
-        "sprites": []
-    }
-]
+{
+    "count": 1050
+    "next": "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20",
+    "previous": null,
+    "resultss": [
+        {
+            "name": "bulbasaur",
+            "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+            "name": "ivysaur",
+            "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        }
+    ]
+}

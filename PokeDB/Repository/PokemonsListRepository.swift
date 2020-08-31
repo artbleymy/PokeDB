@@ -8,7 +8,7 @@
 
 protocol IPokemonsListRepository
 {
-	func loadPokemons(completion: @escaping (Result<[Pokemon], ServiceError>) -> Void)
+	func loadPokemons(completion: @escaping (Result<PokemonsList, ServiceError>) -> Void)
 }
 
 final class PokemonsListRepository: IPokemonsListRepository
@@ -19,7 +19,7 @@ final class PokemonsListRepository: IPokemonsListRepository
 		self.networkService = networkService
 	}
 
-	func loadPokemons(completion: @escaping (Result<[Pokemon], ServiceError>) -> Void) {
-		self.networkService.request(to: .pokemon, completion: completion)
+	func loadPokemons(completion: @escaping (Result<PokemonsList, ServiceError>) -> Void) {
+		self.networkService.request(to: .pokemonsList, completion: completion)
 	}
 }

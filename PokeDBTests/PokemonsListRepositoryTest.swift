@@ -12,14 +12,17 @@ import XCTest
 final class PokemonsListRepositoryTest: XCTestCase
 {
 	func testPokemonsListRepository() {
-		let pokemonsList = [
-			Pokemon(id: 3, name: "pikachu", order: 6, sprites: []),
-			Pokemon(id: 4, name: "raichu", order: 8, sprites: []),
-		]
+		let pokemonsList = PokemonsList(count: 1050,
+										next: URL(string: "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"),
+										previous: nil,
+										results: [
+											NamedAPIResource(name: "bulbasaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/1/")),
+											NamedAPIResource(name: "ivysaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/2/")),
+		])
 
 		let pokemonsListRepository = PokemonsListRepositoryMock()
 
-		pokemonsListRepository.loadPokemons { (result: Result<[Pokemon], ServiceError>) in
+		pokemonsListRepository.loadPokemons { (result: Result<PokemonsList, ServiceError>) in
 			switch result {
 			case .success(let pokemons):
 				XCTAssertEqual(pokemons, pokemonsList)

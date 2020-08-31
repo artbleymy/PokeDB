@@ -12,14 +12,17 @@ import XCTest
 final class NetworkServiceTests: XCTestCase
 {
 	func testNetworkService() {
-		let pokemonsList = [
-			Pokemon(id: 1, name: "pikachu", order: 2, sprites: []),
-			Pokemon(id: 2, name: "raichu", order: 5, sprites: []),
-		]
+		let pokemonsList = PokemonsList(count: 1050,
+										next: URL(string: "https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"),
+										previous: nil,
+										results: [
+											NamedAPIResource(name: "bulbasaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/1/")),
+											NamedAPIResource(name: "ivysaur", url: URL(string: "https://pokeapi.co/api/v2/pokemon/2/")),
+		])
 
 		let networkService = NetworkServiceMock(response: "pokemons_list")
 
-		networkService.request(to: .pokemon) { (result: Result<[Pokemon], ServiceError>) in
+		networkService.request(to: .pokemon) { (result: Result<PokemonsList, ServiceError>) in
 			switch result {
 			case .success(let pokemons):
 				XCTAssertEqual(pokemons, pokemonsList)
@@ -31,7 +34,7 @@ final class NetworkServiceTests: XCTestCase
 
 	func testNetworkServideParsingError() {
 		let networkService = NetworkServiceMock(response: "pokemons_list_invalid")
-		networkService.request(to: .pokemon) { (result: Result<[Pokemon], ServiceError>) in
+		networkService.request(to: .pokemon) { (result: Result<PokemonsList, ServiceError>) in
 			switch result {
 			case .failure(.parsingError):
 				return

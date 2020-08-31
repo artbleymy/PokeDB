@@ -8,5 +8,6 @@
 
 enum Endpoint
 {
+	case pokemonsList
 	case pokemon
 }

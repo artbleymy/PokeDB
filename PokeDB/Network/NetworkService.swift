@@ -18,7 +18,10 @@ final class NetworkService: INetworkService
 	func request<T: Decodable>(to endpoint: Endpoint,
 				 completion: @escaping (Result<T, ServiceError>) -> Void) {
 		let data = Data("""
-						[{\"id\": 1, \"name\": \"pikachu\", \"sprites\": []}]
+						{\"count\":1050,
+						\"next\":\"https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20\",
+						\"previous\":null,
+						\"results\":[{\"name\":\"bulbasaur\",\"url\":\"https://pokeapi.co/api/v2/pokemon/1/\"}]}
 						""".utf8)
 		do {
 			let resultData = try JSONDecoder().decode(T.self, from: data)
