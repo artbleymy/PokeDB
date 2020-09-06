@@ -24,4 +24,3 @@ extension PokemonDetailsViewController: IPokemonDetailsViewController
 		self.presenter = presenter
 	}
 }
-
