@@ -30,12 +30,9 @@ final class PokemonsListRepository: IPokemonsListRepository
 				let completionHandler: (Result<ApiPokemon, ServiceError>, URL) -> Void = { result, sourceUrl in
 					switch result {
 					case .success(let pokemon):
-						pokemons.append(Pokemon(id: pokemon.id,
-												name: pokemon.name,
-												url: sourceUrl,
-												imageUrl: pokemon.sprites.frontDefault))
+						pokemons.append(Pokemon(from: pokemon, sourceUrl: sourceUrl))
 					default:
-						break
+						assertionFailure("Get pokemon error from \(sourceUrl)")
 					}
 					dispatchGroup.leave()
 				}

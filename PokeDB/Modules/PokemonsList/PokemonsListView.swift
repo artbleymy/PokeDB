@@ -18,10 +18,30 @@ final class PokemonsListView: UIView
 {
 	private let moduleType: ModuleType
 	private let presenter: IPokemonsListPresenter
-	private let searchBar = UISearchBar()
-	private let tableView = UITableView()
+
+	private let searchBar: UISearchBar = {
+		let searchBar = UISearchBar()
+		searchBar.enablesReturnKeyAutomatically = false
+		searchBar.translatesAutoresizingMaskIntoConstraints = false
+		return searchBar
+	}()
+
+	private let tableView: UITableView = {
+		let tableView = UITableView()
+		tableView.register(Cell.self, forCellReuseIdentifier: Constants.cellIdentifier)
+		tableView.tableFooterView = UIView()
+		tableView.keyboardDismissMode = .onDrag
+		tableView.translatesAutoresizingMaskIntoConstraints = false
+		return tableView
+	}()
+
 	private let refreshControl = UIRefreshControl()
-	private let loader = UIActivityIndicatorView()
+
+	private let loader: UIActivityIndicatorView = {
+		let loader = UIActivityIndicatorView()
+		loader.translatesAutoresizingMaskIntoConstraints = false
+		return loader
+	}()
 
 	init(presenter: IPokemonsListPresenter, moduleType: ModuleType) {
 		self.presenter = presenter
@@ -102,8 +122,6 @@ private extension PokemonsListView
 	func setupSearchBar(with safeArea: UILayoutGuide) {
 		self.addSubview(self.searchBar)
 		self.searchBar.delegate = self
-		self.searchBar.enablesReturnKeyAutomatically = false
-		self.searchBar.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
 			searchBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
 			searchBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
@@ -116,10 +134,6 @@ private extension PokemonsListView
 		self.tableView.dataSource = self
 		self.tableView.delegate = self
 		self.tableView.refreshControl = self.refreshControl
-		self.tableView.register(Cell.self, forCellReuseIdentifier: Constants.cellIdentifier)
-		self.tableView.tableFooterView = UIView()
-		self.tableView.keyboardDismissMode = .onDrag
-		self.tableView.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
 			tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
 			tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
@@ -130,7 +144,6 @@ private extension PokemonsListView
 
 	func setupActivityIndicator(with safeArea: UILayoutGuide) {
 		self.addSubview(self.loader)
-		loader.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
 			loader.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
 			loader.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
