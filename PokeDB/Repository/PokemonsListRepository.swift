@@ -43,10 +43,14 @@ final class PokemonsListRepository: IPokemonsListRepository
 				}
 
 				dispatchGroup.notify(queue: .main) {
-					completion(.success(pokemons))
+					DispatchQueue.main.async {
+						completion(.success(pokemons))
+					}
 				}
 			case .failure(let error) :
-				completion(.failure(error))
+				DispatchQueue.main.async {
+					completion(.failure(error))
+				}
 			}
 		}
 	}

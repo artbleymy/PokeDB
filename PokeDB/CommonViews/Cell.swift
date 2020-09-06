@@ -12,7 +12,7 @@ final class Cell: UITableViewCell
 {
 	var icon: UIImageView = {
 		let imageView = UIImageView()
-		imageView.contentMode = .scaleAspectFit
+//		imageView.contentMode = .scaleAspectFit
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		return imageView
 	}()
