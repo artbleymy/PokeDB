@@ -12,6 +12,7 @@ protocol IPokemonsListView: AnyObject
 {
 	func startLoader()
 	func stopLoader()
+	func reloadTableData()
 }
 
 final class PokemonsListView: UIView
@@ -19,18 +20,11 @@ final class PokemonsListView: UIView
 	private let moduleType: ModuleType
 	private let presenter: IPokemonsListPresenter
 
-	private let searchBar: UISearchBar = {
-		let searchBar = UISearchBar()
-		searchBar.enablesReturnKeyAutomatically = false
-		searchBar.translatesAutoresizingMaskIntoConstraints = false
-		return searchBar
-	}()
-
 	private let tableView: UITableView = {
 		let tableView = UITableView()
-		tableView.register(Cell.self, forCellReuseIdentifier: Constants.cellIdentifier)
 		tableView.tableFooterView = UIView()
 		tableView.keyboardDismissMode = .onDrag
+		tableView.register(Cell.self, forCellReuseIdentifier: Constants.cellIdentifier)
 		tableView.translatesAutoresizingMaskIntoConstraints = false
 		return tableView
 	}()
@@ -66,15 +60,12 @@ extension PokemonsListView: IPokemonsListView
 	func stopLoader() {
 		self.loader.stopAnimating()
 	}
-}
 
-// MARK: - SearchBar delegate
-extension PokemonsListView: UISearchBarDelegate
-{
-	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		self.endEditing(true)
+	func reloadTableData() {
+		self.tableView.reloadData()
 	}
 }
+
 // MARK: - tableView delegate
 extension PokemonsListView: UITableViewDelegate
 {
@@ -91,12 +82,16 @@ extension PokemonsListView: UITableViewDelegate
 extension PokemonsListView: UITableViewDataSource
 {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 5
+		return self.presenter.currentCount
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
-		cell.textLabel?.text = "Experimental cell"
+		if let cell = cell as? Cell {
+			cell.icon.image = nil
+			cell.icon.makeRounded()
+			self.presenter.setUpCell(cell, index: indexPath.row)
+		}
 		return cell
 	}
 }
@@ -109,7 +104,6 @@ private extension PokemonsListView
 
 		self.backgroundColor = .white
 		self.setupRefreshControl()
-		self.setupSearchBar(with: safeArea)
 		self.setupTableView(with: safeArea)
 		self.setupActivityIndicator(with: safeArea)
 		self.setAccesabilityIds()
@@ -117,16 +111,6 @@ private extension PokemonsListView
 
 	func setupRefreshControl() {
 		self.refreshControl.addTarget(self, action: #selector(self.refresh(sender:)), for: .valueChanged)
-	}
-
-	func setupSearchBar(with safeArea: UILayoutGuide) {
-		self.addSubview(self.searchBar)
-		self.searchBar.delegate = self
-		NSLayoutConstraint.activate([
-			searchBar.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-			searchBar.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-			searchBar.topAnchor.constraint(equalTo: safeArea.topAnchor),
-		])
 	}
 
 	func setupTableView(with safeArea: UILayoutGuide) {
@@ -137,7 +121,7 @@ private extension PokemonsListView
 		NSLayoutConstraint.activate([
 			tableView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
 			tableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-			tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor),
+			tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
 			tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
 		])
 	}
@@ -158,6 +142,5 @@ private extension PokemonsListView
 
 	func setAccesabilityIds() {
 		self.tableView.accessibilityIdentifier = self.moduleType.rawValue + Constants.AccessablityIdPostfix.tableView.rawValue
-		self.searchBar.accessibilityIdentifier = self.moduleType.rawValue + Constants.AccessablityIdPostfix.searchBar.rawValue
 	}
 }

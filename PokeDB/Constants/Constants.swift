@@ -19,6 +19,7 @@ enum Constants
 	enum Metrics
 	{
 		static let cellHeight: CGFloat = 60
+		static let padding: CGFloat = 5
 	}
 
 	enum AccessablityIdPostfix: String
