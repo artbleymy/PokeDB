@@ -18,6 +18,25 @@ struct PokemonSprites: Codable, Equatable
 	let backShiny: URL?
 	let backShinyFemale: URL?
 
+	init(frontDefault: URL? = nil,
+		 frontFemale: URL? = nil,
+		 frontShiny: URL? = nil,
+		 frontShinyFemale: URL? = nil,
+		 backDefault: URL? = nil,
+		 backFemale: URL? = nil,
+		 backShiny: URL? = nil,
+		 backShinyFemale: URL? = nil) {
+
+		self.frontDefault = frontDefault
+		self.frontFemale = frontFemale
+		self.frontShiny = frontShiny
+		self.frontShinyFemale = frontShinyFemale
+		self.backDefault = backDefault
+		self.backFemale = backFemale
+		self.backShiny = backShiny
+		self.backShinyFemale = backShinyFemale
+	}
+
 	private enum CodingKeys: String, CodingKey
 	{
 		case frontDefault = "front_default"
