@@ -10,6 +10,8 @@ import UIKit
 protocol IImageRepository
 {
 	func loadImageFromUrl(_ url: URL?, completion: @escaping (UIImage) -> Void)
+
+	func loadSprites(sprites: PokemonSprites, completion: @escaping (Result<[UIImage], Error>) -> Void)
 }
 
 final class ImageRepository: IImageRepository
@@ -29,6 +31,38 @@ final class ImageRepository: IImageRepository
 						}
 					}
 				}
+			}
+		}
+	}
+
+	func loadSprites(sprites: PokemonSprites, completion: @escaping (Result<[UIImage], Error>) -> Void) {
+		let dispatchGroup = DispatchGroup()
+
+		var images: [UIImage] = []
+
+		[
+			sprites.frontDefault,
+			sprites.frontFemale,
+			sprites.frontShiny,
+			sprites.frontShinyFemale,
+			sprites.backDefault,
+			sprites.backFemale,
+			sprites.backShiny,
+			sprites.backShinyFemale,
+			]
+			.compactMap{ $0 }
+			.forEach { url in
+				let completion: (UIImage) -> Void = { image in
+					images.append(image)
+					dispatchGroup.leave()
+				}
+				dispatchGroup.enter()
+				self.loadImageFromUrl(url, completion: completion)
+			}
+
+		dispatchGroup.notify(queue: .main) {
+			DispatchQueue.main.async {
+				completion(.success(images))
 			}
 		}
 	}

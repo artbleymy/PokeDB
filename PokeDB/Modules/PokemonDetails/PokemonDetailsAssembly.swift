@@ -11,20 +11,26 @@ public enum PokemonDetailsAssembly
 {
 	static let moduleType: ModuleType = .pokemonDetails
 
+	public struct Parameters
+	{
+		let pokemon: Pokemon
+	}
+
 	public struct Dependencies
 	{
 		let imageRepository: IImageRepository
 	}
 
-	public static func makeModule(dependencies: Dependencies) -> UIViewController {
+	public static func makeModule(dependencies: Dependencies, parameters: Parameters) -> UIViewController {
 		let viewController = PokemonDetailsViewController()
 		let router = PokemonDetailsRouter()
 		let presenter = PokemonDetailsPresenter(router: router,
-												imageRepository: dependencies.imageRepository)
+												imageRepository: dependencies.imageRepository,
+												pokemon: parameters.pokemon)
 		let view = PokemonDetailsView(presenter: presenter, moduleType: self.moduleType)
 		presenter.inject(ui: view)
 		viewController.inject(presenter: presenter)
-		viewController.title = self.moduleType.moduleTitle()
+		viewController.title = parameters.pokemon.name
 		viewController.view = view
 		return viewController
 	}
