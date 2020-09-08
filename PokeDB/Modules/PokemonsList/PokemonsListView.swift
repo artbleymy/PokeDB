@@ -74,6 +74,7 @@ extension PokemonsListView: UITableViewDelegate
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		self.presenter.showDetails(by: indexPath.row)
 		self.tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

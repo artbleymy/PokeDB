@@ -49,20 +49,32 @@ private extension ModulesFactory
 		let dependencies = PokemonsListAssembly.Dependencies(pokemonsListRepository: self.pokemonsListRepository,
 															 pokemonsHolder: self.pokemonsHolder,
 															 imageRepository: self.imageRepository)
-		let pokemonsListModule = PokemonsListAssembly.makeModule(dependencies: dependencies)
+		let showDetailsHandler: (Pokemon, UIViewController) -> Void = {(pokemon: Pokemon, viewController: UIViewController) in
+			let detailsModule = self.makeDetails(pokemon: pokemon)
+			viewController.navigationController?.pushViewController(detailsModule, animated: true)
+		}
+		let parameters = PokemonsListAssembly.Parameters(showDetailsHandler: showDetailsHandler)
+		let pokemonsListModule = PokemonsListAssembly.makeModule(dependencies: dependencies, parameters: parameters)
+
 		return pokemonsListModule
 	}
 
 	func makeFavorites() -> UIViewController {
 		let dependencies = FavoritesAssembly.Dependencies()
-		let favoritesModule = FavoritesAssembly.makeModule(dependencies: dependencies)
-		return favoritesModule
+		return FavoritesAssembly.makeModule(dependencies: dependencies)
 	}
 
 	func makeNavigationController(with rootViewController: UIViewController) -> UIViewController {
 		let navigationController = UINavigationController(rootViewController: rootViewController)
 		navigationController.navigationBar.prefersLargeTitles = true
 		return navigationController
+	}
+
+	func makeDetails(pokemon: Pokemon) -> UIViewController {
+		let dependencies = PokemonDetailsAssembly.Dependencies(imageRepository: self.imageRepository)
+		let parameters = PokemonDetailsAssembly.Parameters(pokemon: pokemon)
+
+		return  PokemonDetailsAssembly.makeModule(dependencies: dependencies, parameters: parameters)
 	}
 
 	func configureTabItem(for controller: UIViewController, moduleType: ModuleType) {

@@ -11,6 +11,11 @@ public enum PokemonsListAssembly
 {
 	static let moduleType: ModuleType = .pokemonsList
 
+	public struct Parameters
+	{
+		let showDetailsHandler: (Pokemon, UIViewController) -> Void
+	}
+
 	public struct Dependencies
 	{
 		let pokemonsListRepository: IPokemonsListRepository
@@ -18,9 +23,11 @@ public enum PokemonsListAssembly
 		let imageRepository: IImageRepository
 	}
 
-	public static func makeModule(dependencies: Dependencies) -> UIViewController {
+	public static func makeModule(dependencies: Dependencies, parameters: Parameters) -> UIViewController {
 		let viewController = PokemonsListViewController()
-		let router = PokemonsListRouter()
+		let router = PokemonsListRouter(viewController: viewController,
+										showDetailsHandler: parameters.showDetailsHandler)
+
 		let presenter = PokemonsListPresenter(router: router,
 											  pokemonsListRepository: dependencies.pokemonsListRepository,
 											  pokemonsHolder: dependencies.pokemonsHolder,

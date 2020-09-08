@@ -14,6 +14,7 @@ protocol IPokemonsListPresenter: AnyObject
 
 	func inject(ui: IPokemonsListView)
 	func setUpCell(_ cell: Cell, index: Int)
+	func showDetails(by index: Int)
 }
 final class PokemonsListPresenter
 {
@@ -53,6 +54,10 @@ extension PokemonsListPresenter: IPokemonsListPresenter
 
 	func inject(ui: IPokemonsListView) {
 		self.ui = ui
+	}
+
+	func showDetails(by index: Int) {
+		self.router.showDetails(pokemon: self.pokemonsHolder.pokemons[index])
 	}
 }
 

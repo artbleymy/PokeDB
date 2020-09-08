@@ -15,11 +15,16 @@ enum Constants
 	]
 
 	static let cellIdentifier = "Cell"
+	static let imageCellIdentifier = "ImageCell"
 
 	enum Metrics
 	{
 		static let cellHeight: CGFloat = 60
 		static let padding: CGFloat = 5
+		static let detailsImageHeight: CGFloat = 300
+		static let detailsImagesCollectionHeight: CGFloat = 100
+		static let detailsImageCornerRadius: CGFloat = 5
+		static let detailsImagesCollectionWidth: CGFloat = 100
 	}
 
 	enum AccessablityIdPostfix: String
